@@ -10,37 +10,60 @@
 #include<fcntl.h>
 
 #include"cufs.h"
-#include<"op.h"
+#include"op.h"
 
 int log_to_stderr;
 
 static int cufs_getattr(const char *path, struct stat *stbuf){
+
 }
 
 static int cufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi){
+	int res;
+	res = op_readdir(path, buf, filler, offset, fi);
+	return res;
 }
-
 static int cufs_mkdir(const char *path, mode_t flag){
+	int res;
+	res = op_mkdir(path, flag);
+	return res;
 }
 
 static int cufs_create(const char *path, mode_t flag, struct fuse_file_info *fi){
+	int res;
+	res = op_create(path, flag, fi);
+	return res;
 }
 
 static int cufs_mknod(const char *path, mode_t mode, dev_t rdev){
-
+	int res;
+	res = op_mknod(path, mode, rdev);
+	return res;
 }
 
 static int cufs_unlink(const char *path){
+	int res;
+	res = op_unlink(path);
+	return res;
 }
 
 static int cufs_rmdir(const char *path){
+	int res;
+	res = op_rmdir(path);
+	return res;
 }
 
 static int cufs_write(const char *path, const char *buffer, size_t size, off_t offset, struct fuse_file_info *fi){
+	int res;
+	res = op_write(path, buffer, size, offset, fi)
+	return res;
 }
 
 
-static int ufs_read(const char *path, char *buffer, size_t size, off_t offset, struct fuse_file_info *fi){
+static int cufs_read(const char *path, char *buffer, size_t size, off_t offset, struct fuse_file_info *fi){
+	int res;
+	res = op_read(path, buffer, size, offset, fi);
+	return res;
 }
 /*
  * static int ufs_truncate(const char *path, off_t length){
